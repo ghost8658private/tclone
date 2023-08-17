@@ -1,0 +1,26 @@
+name: update main branch
+
+on:
+  push:
+    branches:
+      - main 
+
+env:
+  github_token: ${{ secrets.PAT_TOKEN }}
+
+jobs:
+  copy_branch:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Source Repo
+        uses: actions/checkout@v2
+      
+      - name: Update branch in repo
+        run: |
+          git checkout main
+          git remote remove origin
+          git remote add origin https://github.com/ghost8658private/ttesting.git
+          git pull origin main
+          ls
+

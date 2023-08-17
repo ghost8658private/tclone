@@ -26,4 +26,8 @@ jobs:
           git config pull.rebase false 
           git pull origin main --allow-unrelated-histories
           ls
-          git push origin main
+        
+      - name: GitHub Push
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+            branch: main

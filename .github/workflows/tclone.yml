@@ -23,7 +23,7 @@ jobs:
           git checkout main
           git remote remove origin
           git remote add origin https://github.com/ghost8658private/ttesting.git
-          git config pull.rebase true 
+          git config pull.rebase false 
           git pull origin main
           ls
 

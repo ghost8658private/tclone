@@ -27,8 +27,8 @@ jobs:
           git pull origin main --allow-unrelated-histories
           ls
 
-      - name: Commit and Push Changes
-        run: |
-            git add .
-            git commit -m "Update main branch"
-            git push origin main
+    #   - name: Commit and Push Changes
+    #     run: |
+    #         git add .
+    #         git commit -m "Update main branch"
+    #         git push origin main

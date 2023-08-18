@@ -26,12 +26,15 @@ jobs:
           BRANCHES=main:main
           git remote set-url origin $UPSTREAM_REPO
           git fetch $UPSTREAM_REPO main
+          git remote -v
 
       - name: Merge Upstream Changes
         run: |
           git checkout main
           git merge $UPSTREAM_REPO main --allow-unrelated-histories
-          git remote set-url --push origin $MAIN_REPO $UPSTREAM_REPO
+          git remote set-url --delete origin $UPSTREAM_REPO
+          git remote set-url --add origin $MAIN_REPO
+          git remote -v
 
       - name: Push Changes
         run: |

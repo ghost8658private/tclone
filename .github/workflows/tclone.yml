@@ -24,7 +24,7 @@ jobs:
           UPSTREAM_REPO=https://github.com/ghost8658private/ttesting.git
           MAIN_REPO=https://github.com/ghost8658private/tclone.git
           BRANCHES=main:main
-          git remote add $UPSTREAM_REPO
+          git remote set-url origin $UPSTREAM_REPO
           git fetch $UPSTREAM_REPO main
 
       - name: Merge Upstream Changes

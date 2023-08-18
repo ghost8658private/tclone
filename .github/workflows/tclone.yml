@@ -31,7 +31,7 @@ jobs:
         run: |
           git checkout main
           git merge $UPSTREAM_REPO main --allow-unrelated-histories
-          git remote set-url origin $MAIN_REPO
+          git remote set-url --push origin $MAIN_REPO $UPSTREAM_REPO
 
       - name: Push Changes
         run: |

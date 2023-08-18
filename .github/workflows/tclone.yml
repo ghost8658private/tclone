@@ -28,7 +28,7 @@ jobs:
           git remote -v
           git remote add another-origin $UPSTREAM_REPO
           git fetch $UPSTREAM_REPO main
-          git merge $UPSTREAM_REPO main --allow-unrelated-histories
+          git merge another-origin main --allow-unrelated-histories
           git checkout main
           git remote -v
           ls

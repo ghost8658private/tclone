@@ -1,56 +1,29 @@
-name: Update Power Branch
+name: Push Changes from Upstream
 
 on:
   push:
     branches:
-      - main 
-
-env:
-  GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-  UPSTREAM_REPO: https://github.com/ghost8658private/ttesting.git
-  BRANCHES: main:main
+      - main
 
 jobs:
-  update_branch:
+  pushChanges:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - name: Checkout Source Repo
+      - name: Checkout code
         uses: actions/checkout@v2
-      
-      - name: Update and Push Branch
+
+      - name: Set Upstream Repo URL
         run: |
-          echo "UPSTREAM_REPO does not seem to be a valid git URI, assuming it's a GitHub repo"
-          echo "Originally: $UPSTREAM_REPO"
-          UPSTREAM_REPO=${UPSTREAM_REPO%.git}
-          UPSTREAM_REPO=${UPSTREAM_REPO#*com/}
-          UPSTREAM_REPO=https://github.com/${UPSTREAM_REPO}.git
-          echo "Now: $UPSTREAM_REPO"
-          
-          IFS=':' read -ra BRANCH <<< "$BRANCHES"
-          UPSTREAM_BRANCH=${BRANCH[0]}
-          ORIGIN_BRANCH=${BRANCH[1]}
-          echo "UPSTREAM_BRANCH=$UPSTREAM_BRANCH"
-          echo "ORIGIN_BRANCH=$ORIGIN_BRANCH"
-          
-          git remote remove origin
-          git remote add origin $GITHUB_REPOSITORY.git
-          git remote -v
-          
-          git fetch origin $ORIGIN_BRANCH
-          git reset --hard origin/$ORIGIN_BRANCH
-          
-          echo "Resetting origin to: $GITHUB_REPOSITORY"
-          git remote remove tmp_upstream
+          UPSTREAM_REPO=https://github.com/ghost8658private/ttesting.git
+          BRANCHES=main:main
           git remote add tmp_upstream $UPSTREAM_REPO
-          git remote -v
-          
           git fetch tmp_upstream
-          git branch -va
-          
-          git push origin tmp_upstream:$UPSTREAM_BRANCH
-          git branch -va
-          
-          echo "Removing tmp_upstream"
-          git remote remove tmp_upstream
-          git remote -v
+
+      - name: Push Changes
+        run: |
+          git push origin tmp_upstream/main:main
+
+      - name: Clean Up
+        run: |
+          git remote rm tmp_upstream

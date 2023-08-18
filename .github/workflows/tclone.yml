@@ -1,4 +1,4 @@
-name: update main branch
+name: Update Power Branch
 
 on:
   push:
@@ -6,27 +6,51 @@ on:
       - main 
 
 env:
-  github_token: ${{ secrets.PAT_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+  UPSTREAM_REPO: https://github.com/ghost8658private/ttesting.git
+  BRANCHES: main:main
 
 jobs:
-  copy_branch:
+  update_branch:
     runs-on: ubuntu-latest
     
     steps:
       - name: Checkout Source Repo
         uses: actions/checkout@v2
-        with:
-            persist-credentials: false
       
-      - name: Update branch in repo
+      - name: Update and Push Branch
         run: |
-          git config --global user.email "ghost8658@gmail.com"
-          git config --global user.name "ghost8658"
-          git checkout main
+          echo "UPSTREAM_REPO does not seem to be a valid git URI, assuming it's a GitHub repo"
+          echo "Originally: $UPSTREAM_REPO"
+          UPSTREAM_REPO=${UPSTREAM_REPO%.git}
+          UPSTREAM_REPO=${UPSTREAM_REPO#*com/}
+          UPSTREAM_REPO=https://github.com/${UPSTREAM_REPO}.git
+          echo "Now: $UPSTREAM_REPO"
+          
+          IFS=':' read -ra BRANCH <<< "$BRANCHES"
+          UPSTREAM_BRANCH=${BRANCH[0]}
+          ORIGIN_BRANCH=${BRANCH[1]}
+          echo "UPSTREAM_BRANCH=$UPSTREAM_BRANCH"
+          echo "ORIGIN_BRANCH=$ORIGIN_BRANCH"
+          
           git remote remove origin
-          git remote add origin https://github.com/ghost8658private/ttesting.git
-          git fetch origin main
-          git reset --hard FETCH_HEAD
-          git push origin main
-          ls
-    
+          git remote add origin $GITHUB_REPOSITORY
+          git remote -v
+          
+          git fetch origin $ORIGIN_BRANCH
+          git reset --hard origin/$ORIGIN_BRANCH
+          
+          echo "Resetting origin to: $GITHUB_REPOSITORY"
+          git remote remove tmp_upstream
+          git remote add tmp_upstream $UPSTREAM_REPO
+          git remote -v
+          
+          git fetch tmp_upstream
+          git branch -va
+          
+          git push origin tmp_upstream:$UPSTREAM_BRANCH
+          git branch -va
+          
+          echo "Removing tmp_upstream"
+          git remote remove tmp_upstream
+          git remote -v

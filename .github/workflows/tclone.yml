@@ -1,9 +1,20 @@
-name: Push Changes from Upstream
+name: Tclone Mirror Branch
 
 on:
-  push:
-    branches:
-      - case
+  workflow_call:
+    inputs:
+      upstream-repo:
+        required: true
+        type: string
+      main-repo:
+        required: true
+        type: string
+      branches:
+        required: true
+        type: string
+    secrets:
+      ACCESS_TOKEN:
+        required: true
 
 jobs:
   pushChanges:
@@ -23,9 +34,9 @@ jobs:
           UPSTREAM_REPO=https://github.com/ghost8658private/ttesting.git
           MAIN_REPO=https://github.com/ghost8658private/tclone.git
           BRANCHES=main:main
-          git remote set-url origin $MAIN_REPO
+          git remote set-url origin ${{ inputs.main-repo }}
           git remote -v
-          git remote add another-origin $UPSTREAM_REPO
+          git remote add another-origin ${{ inputs.upstream-repo }}
           git config pull.rebase false 
           git pull another-origin main --allow-unrelated-histories
           git checkout main
@@ -34,7 +45,7 @@ jobs:
           git push origin main
           git remote -v
         env:
-          github_token: ${{ secrets.PAT_TOKEN }}
+          github_token: ${{ secrets.ACCESS_TOKEN }}
 
       - name: Clean Up
         run: |

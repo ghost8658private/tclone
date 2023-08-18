@@ -31,7 +31,7 @@ jobs:
           git checkout main
           ls
 
-          git push --force origin main
+          git push origin main
           git remote -v
         env:
           github_token: ${{ secrets.PAT_TOKEN }}

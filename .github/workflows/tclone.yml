@@ -26,6 +26,7 @@ jobs:
           git remote set-url origin $MAIN_REPO
           git remote -v
           git remote add another-origin $UPSTREAM_REPO
+          git config pull.rebase false
           git pull another-origin main
           git checkout main
           ls

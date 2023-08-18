@@ -5,7 +5,6 @@ on:
     branches:
       - main
 
-
 jobs:
   pushChanges:
     runs-on: ubuntu-latest
@@ -16,8 +15,8 @@ jobs:
 
       - name: Set Git Credentials
         run: |
-            git config --global user.email "Ghost8658@gmail.com"
-            git config --global user.name "Ghost8658"
+          git config --global user.email "Ghost8658@gmail.com"
+          git config --global user.name "Ghost8658"
 
       - name: Set Upstream Repo URL
         run: |
@@ -32,7 +31,10 @@ jobs:
           git push origin another-origin:main
           git remote -v
         env:
-            github_token: ${{ secrets.PAT_TOKEN }}
+          github_token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Fetch from another-origin
+        run: git fetch another-origin main
 
       - name: Clean Up
         run: |

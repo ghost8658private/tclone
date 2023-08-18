@@ -32,8 +32,14 @@ jobs:
 
       - name: Push Changes
         run: |
-          git pull tmp_upstream main
-          git push origin tmp_upstream/main:main
+          # Configure SSH key for authentication
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+          # Push using SSH
+          git push origin main
 
       - name: Clean Up
         run: |

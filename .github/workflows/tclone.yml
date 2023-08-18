@@ -13,6 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Set Git Credentials
+        run: |
+            git config --global user.email "Ghost8658@gmail.com"
+            git config --global user.name "Ghost8658"
+
       - name: Set Upstream Repo URL
         run: |
           UPSTREAM_REPO=https://github.com/ghost8658private/ttesting.git

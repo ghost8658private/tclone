@@ -30,7 +30,7 @@ jobs:
           git pull $UPSTREAM_REPO main --allow-unrelated-histories
           git checkout main
           ls
-          git push origin another-origin/main
+          git push origin another-origin:main
           git remote -v
         env:
           github_token: ${{ secrets.PAT_TOKEN }}

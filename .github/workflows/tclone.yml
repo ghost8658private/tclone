@@ -22,7 +22,7 @@ jobs:
         run: |
           UPSTREAM_REPO=https://github.com/ghost8658private/ttesting.git
           BRANCHES=main:main
-          git remote set-url origin git@github.com:$UPSTREAM_REPO
+          git remote set-url origin https://github.com/$UPSTREAM_REPO
           git fetch $UPSTREAM_REPO main
 
       - name: Merge Upstream Changes

@@ -28,25 +28,8 @@ jobs:
           git remote -v
           git remote add another-origin $UPSTREAM_REPO
           git fetch $UPSTREAM_REPO main
-          git push origin $UPSTREAM_REPO:main
-          
-
-          # git checkout main
-          #git merge $UPSTREAM_REPO main --allow-unrelated-histories
-          
+          #git push origin $UPSTREAM_REPO:main
           git remote -v
-
-      - name: Push Changes
-        run: |
-          # Configure SSH key for authentication
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-
-          # Push using SSH
-          # git pull $UPSTREAM_REPO
-          #git push origin main
         env:
             github_token: ${{ secrets.PAT_TOKEN }}
 

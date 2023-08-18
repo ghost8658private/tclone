@@ -1,4 +1,4 @@
-name: Tclone Mirror Branch
+name: Sync Upstream to Main
 
 on:
   workflow_call:
@@ -9,15 +9,12 @@ on:
       main-repo:
         required: true
         type: string
-      branches:
-        required: true
-        type: string
     secrets:
       ACCESS_TOKEN:
         required: true
 
 jobs:
-  pushChanges:
+  synchronize:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,24 +26,15 @@ jobs:
           git config --global user.email "Ghost8658@gmail.com"
           git config --global user.name "Ghost8658"
 
-      - name: Set Upstream Repo URL
+      - name: Add Upstream Remote
         run: |
-          UPSTREAM_REPO=https://github.com/ghost8658private/ttesting.git
-          MAIN_REPO=https://github.com/ghost8658private/tclone.git
-          BRANCHES=main:main
-          git remote set-url origin ${{ inputs.main-repo }}
-          git remote -v
-          git remote add another-origin ${{ inputs.upstream-repo }}
-          git config pull.rebase false 
-          git pull another-origin main --allow-unrelated-histories
-          git checkout main
-          ls
-          git pull origin main --allow-unrelated-histories
-          git push origin main
-          git remote -v
-        env:
-          github_token: ${{ secrets.ACCESS_TOKEN }}
+          git remote add upstream ${{ inputs.upstream-repo }}
 
-      - name: Clean Up
+      - name: Fetch Upstream Changes
         run: |
-          git remote rm another-origin
+          git fetch upstream
+
+      - name: Push Upstream Changes to Main Repo
+        run: |
+          git push ${{ inputs.main-repo }} HEAD:main
+

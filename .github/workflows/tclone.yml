@@ -27,7 +27,7 @@ jobs:
           git remote -v
           git remote add another-origin $UPSTREAM_REPO
           git config pull.rebase false 
-          git pull $UPSTREAM_REPO main --allow-unrelated-histories
+          git pull another-origin main --allow-unrelated-histories
           git checkout main
           ls
           git push origin another-origin:main

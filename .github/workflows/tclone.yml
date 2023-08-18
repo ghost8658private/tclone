@@ -3,7 +3,7 @@ name: Push Changes from Upstream
 on:
   push:
     branches:
-      - main
+      - case
 
 jobs:
   pushChanges:

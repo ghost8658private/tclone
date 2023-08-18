@@ -29,11 +29,11 @@ jobs:
           git remote add another-origin $UPSTREAM_REPO
           ls
           git fetch another-origin main
-          #git push origin $UPSTREAM_REPO:main
+          git push origin another-origin:main
           git remote -v
         env:
             github_token: ${{ secrets.PAT_TOKEN }}
 
       - name: Clean Up
         run: |
-          git remote rm $UPSTREAM_REPO
+          git remote rm another-origin

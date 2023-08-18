@@ -24,25 +24,17 @@ jobs:
           UPSTREAM_REPO=https://github.com/ghost8658private/ttesting.git
           MAIN_REPO=https://github.com/ghost8658private/tclone.git
           BRANCHES=main:main
-
-          git remote remove origin
-          git remote add origin $UPSTREAM_REPO
-          git remote -v
-
-          git fetch $UPSTREAM_REPO main
-          git merge $UPSTREAM_REPO main --allow-unrelated-histories
-
-          git remote remove origin
           git remote set-url origin $MAIN_REPO
           git remote -v
+          git remote add another-origin $UPSTREAM_REPO
+          git fetch $UPSTREAM_REPO main
+          git push origin another-origin:main
+          
 
-
-        #   git remote add another-origin $UPSTREAM_REPO
-        #   git fetch $UPSTREAM_REPO main
-        #   git merge $UPSTREAM_REPO main --allow-unrelated-histories
-        #   git checkout main
-        #   git remote -v
-        #   ls
+          # git checkout main
+          #git merge $UPSTREAM_REPO main --allow-unrelated-histories
+          
+          git remote -v
 
       - name: Push Changes
         run: |
@@ -54,7 +46,7 @@ jobs:
 
           # Push using SSH
           # git pull $UPSTREAM_REPO
-          git push origin main
+          #git push origin main
         env:
             github_token: ${{ secrets.PAT_TOKEN }}
 

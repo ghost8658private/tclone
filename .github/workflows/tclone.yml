@@ -18,7 +18,7 @@ jobs:
           UPSTREAM_REPO=https://github.com/ghost8658private/ttesting.git
           BRANCHES=main:main
           git remote add tmp_upstream $UPSTREAM_REPO
-          git fetch tmp_upstream
+          git fetch tmp_upstream main
 
       - name: Push Changes
         run: |

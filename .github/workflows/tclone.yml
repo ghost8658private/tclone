@@ -22,7 +22,7 @@ jobs:
       - name: Set Upstream Repo URL
         run: |
           UPSTREAM_REPO=https://github.com/ghost8658private/ttesting.git
-          MAIN_REPO=https://github.com/ghost8658private/tclone.git
+          MAIN_REPO=git@github.com:ghost8658private/tclone.git
           BRANCHES=main:main
           git remote set-url origin $UPSTREAM_REPO
           git fetch $UPSTREAM_REPO main
@@ -32,8 +32,8 @@ jobs:
         run: |
           # git checkout main
           git merge $UPSTREAM_REPO main --allow-unrelated-histories
-          git remote set-url --delete origin $UPSTREAM_REPO
-          git remote set-url --add origin $MAIN_REPO
+          git remote set-url origin $MAIN_REPO
+          # git remote set-url --add origin $MAIN_REPO
           git remote -v
 
       - name: Push Changes

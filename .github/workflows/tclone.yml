@@ -28,7 +28,7 @@ jobs:
           git remote -v
           git remote add another-origin $UPSTREAM_REPO
           ls
-          git fetch $UPSTREAM_REPO main
+          git fetch another-origin main
           #git push origin $UPSTREAM_REPO:main
           git remote -v
         env:

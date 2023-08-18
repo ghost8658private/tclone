@@ -36,5 +36,4 @@ jobs:
 
       - name: Push Upstream Changes to Main Repo
         run: |
-          git push ${{ inputs.main-repo }} HEAD:main
-
+          git push git@github.com:ghost8658private/tclone.git HEAD:main

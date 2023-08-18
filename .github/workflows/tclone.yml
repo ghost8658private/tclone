@@ -29,7 +29,7 @@ jobs:
           ls
           git checkout main
           git fetch another-origin main
-          git push origin another-origin:main
+          git push origin main
           git remote -v
         env:
           github_token: ${{ secrets.PAT_TOKEN }}

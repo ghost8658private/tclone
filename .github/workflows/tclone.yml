@@ -28,7 +28,7 @@ jobs:
       - name: Merge Upstream Changes
         run: |
           git checkout main
-          git merge $UPSTREAM_REPO/main --allow-unrelated-histories
+          # git merge $UPSTREAM_REPO/main --allow-unrelated-histories
 
       - name: Push Changes
         run: |
@@ -39,6 +39,7 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
 
           # Push using SSH
+          git pull $UPSTREAM_REPO main
           git push origin main
 
       - name: Clean Up

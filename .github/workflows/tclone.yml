@@ -5,8 +5,6 @@ on:
     branches:
       - main
 
-env:
-    github_token: ${{ secrets.PAT_TOKEN }}
 
 jobs:
   pushChanges:
@@ -44,6 +42,9 @@ jobs:
           # Push using SSH
           # git pull $UPSTREAM_REPO
           git push origin main
+        
+        env:
+            github_token: ${{ secrets.PAT_TOKEN }}
 
       - name: Clean Up
         run: |

@@ -32,7 +32,7 @@ jobs:
 
       - name: Push Changes
         run: |
-          git pull $UPSTREAM_REPO
+          git pull tmp_upstream
           git push origin tmp_upstream/main:main
 
       - name: Clean Up

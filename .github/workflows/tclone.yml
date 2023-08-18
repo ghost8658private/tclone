@@ -22,13 +22,13 @@ jobs:
         run: |
           UPSTREAM_REPO=https://github.com/ghost8658private/ttesting.git
           BRANCHES=main:main
-          git remote add tmp_upstream $UPSTREAM_REPO
-          git fetch tmp_upstream main
+          git remote set-url origin git@github.com:$UPSTREAM_REPO
+          git fetch $UPSTREAM_REPO main
 
       - name: Merge Upstream Changes
         run: |
           git checkout main
-          git merge tmp_upstream/main --allow-unrelated-histories
+          git merge $UPSTREAM_REPO/main --allow-unrelated-histories
 
       - name: Push Changes
         run: |
@@ -43,4 +43,4 @@ jobs:
 
       - name: Clean Up
         run: |
-          git remote rm tmp_upstream
+          git remote rm $UPSTREAM_REPO

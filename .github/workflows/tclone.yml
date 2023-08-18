@@ -34,7 +34,7 @@ jobs:
           echo "ORIGIN_BRANCH=$ORIGIN_BRANCH"
           
           git remote remove origin
-          git remote add origin $GITHUB_REPOSITORY
+          git remote add origin $GITHUB_REPOSITORY.git
           git remote -v
           
           git fetch origin $ORIGIN_BRANCH

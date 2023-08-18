@@ -26,7 +26,7 @@ jobs:
           git remote set-url origin $MAIN_REPO
           git remote -v
           git remote add another-origin $UPSTREAM_REPO
-          git fetch $UPSTREAM_REPO main
+          git pull another-origin main
           git checkout main
           ls
           git push origin main

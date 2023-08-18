@@ -26,8 +26,8 @@ jobs:
           git remote set-url origin $MAIN_REPO
           git remote -v
           git remote add another-origin $UPSTREAM_REPO
-          git config pull.rebase false --allow-unrelated-histories
-          git pull another-origin main
+          git config pull.rebase false 
+          git pull another-origin main --allow-unrelated-histories
           git checkout main
           ls
           git push origin main

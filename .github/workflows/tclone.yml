@@ -30,7 +30,7 @@ jobs:
 
       - name: Merge Upstream Changes
         run: |
-          git checkout main
+          # git checkout main
           git merge $UPSTREAM_REPO main --allow-unrelated-histories
           git remote set-url --delete origin $UPSTREAM_REPO
           git remote set-url --add origin $MAIN_REPO

@@ -1,0 +1,40 @@
+name: Push Changes from Upstream
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  pushChanges:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set Git Credentials
+        run: |
+          git config --global user.email "Ghost8658@gmail.com"
+          git config --global user.name "Ghost8658"
+
+      - name: Set Upstream Repo URL
+        run: |
+          UPSTREAM_REPO=https://github.com/ghost8658private/ttesting.git
+          MAIN_REPO=https://github.com/ghost8658private/tclone.git
+          BRANCHES=main:main
+          git remote set-url origin $MAIN_REPO
+          git remote -v
+          git remote add another-origin $UPSTREAM_REPO
+          git config pull.rebase false 
+          git pull another-origin main --allow-unrelated-histories
+          git checkout main
+          ls
+          git push origin main
+          git remote -v
+        env:
+          github_token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Clean Up
+        run: |
+          git remote rm another-origin

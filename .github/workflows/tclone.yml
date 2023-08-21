@@ -47,6 +47,7 @@ jobs:
 
       - name: Add Upstream Remote
         run: |
+          git remote set-url origin ${{ inputs.main-repo }}
           git remote add upstream ${{ inputs.upstream-repo }}
 
       - name: Fetch Upstream Changes

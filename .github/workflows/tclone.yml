@@ -64,4 +64,4 @@ jobs:
           #git pull origin main --allow-unrelated-histories
           #git merge upstream/main
           #git merge origin/main
-          git push git@github.com:origin HEAD:main
+          git push git@github.com:${{ inputs.main-repo }} HEAD:main

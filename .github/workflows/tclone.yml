@@ -43,10 +43,11 @@ jobs:
             # you're SSH-ing into
             ssh-keyscan github.com >> /home/runner/.ssh/known_hosts
             # DOKKU_SSH_KEY is the name of the repository secret
-            echo "${{ secrets.SSH_PRIVATE_KEY }}" > /home/runner/.ssh/github_actions
-            chmod 600 /home/runner/.ssh/github_actions
+            echo "${{ secrets.SSH_PRIVATE_KEY }}" > /home/runner/.ssh/id_rsa 
+            chmod 600 /home/runner/.ssh/id_rsa 
+            chmod 700 /home/runner/.ssh
             ssh-agent -a $SSH_AUTH_SOCK > /dev/null	
-            ssh-add /home/runner/.ssh
+            ssh-add /home/runner/.ssh/id_rsa 
 
 
 

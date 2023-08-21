@@ -52,7 +52,7 @@ jobs:
 
       - name: Fetch Upstream Changes
         run: |
-          git fetch upstream
+          git fetch upstream main
 
       - name: Push Upstream Changes to Main Repo
         run: |

@@ -56,4 +56,5 @@ jobs:
         run: |
           #ssh -vT git@github.com
           #ssh -T git@github.com
+          git pull upstream main
           git push git@github.com:ghost8658private/tclone.git HEAD:main

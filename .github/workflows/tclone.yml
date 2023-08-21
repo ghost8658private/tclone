@@ -52,10 +52,8 @@ jobs:
             ssh-add /home/runner/.ssh/id_rsa 
 
 
-
-
       - name: Push Upstream Changes to Main Repo
         run: |
-          ssh -vT git@github.com
-          ssh -T git@github.com
+          #ssh -vT git@github.com
+          #ssh -T git@github.com
           git push git@github.com:ghost8658private/tclone.git HEAD:main

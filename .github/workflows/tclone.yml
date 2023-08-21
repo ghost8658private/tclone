@@ -61,6 +61,5 @@ jobs:
           git pull origin main --allow-unrelated-histories
           git merge upstream/main
           git merge origin/main
-          git pull origin main --allow-unrelated-histories
-          git remote set-url origin ${{ inputs.main-repo }}
+          #git remote set-url origin ${{ inputs.main-repo }}
           git push git@github.com:ghost8658private/tclone.git HEAD:main

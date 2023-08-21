@@ -61,7 +61,9 @@ jobs:
           git config pull.rebase false
           git pull upstream main --allow-unrelated-histories
           ls
-          git pull origin main --allow-unrelated-histories
+          git checkout main
+          git pull origin main --allow-unrelated-histories 
+          ls
           #git merge upstream/main
           #git merge origin/main
           git push git@github.com:ghost8658private/tclone.git HEAD:main

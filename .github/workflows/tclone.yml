@@ -23,8 +23,8 @@ jobs:
 
       - name: Set Git Credentials
         run: |
-          git config --global user.email "Ghost8658@gmail.com"
-          git config --global user.name "Ghost8658"
+          git config --global user.email "bbbeeeaaabbb9@gmail.com"
+          git config --global user.name "ghost8658private"
 
       - name: Add Upstream Remote
         run: |

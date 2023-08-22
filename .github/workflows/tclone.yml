@@ -63,7 +63,7 @@ jobs:
           ls
           
           git checkout -b maine
-          #git merge upstream/maine
-          git pull origin maine --allow-unrelated-histories 
+          git merge upstream/maine
+          #git pull origin maine --allow-unrelated-histories 
           ls
           git push git@github.com:${{ inputs.main-repo }}

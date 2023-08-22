@@ -66,4 +66,4 @@ jobs:
           #git merge main/maine
           #git pull origin --allow-unrelated-histories 
           ls
-          git push git@github.com:${{ inputs.main-repo }}
+          git push -u origin maine

@@ -58,11 +58,11 @@ jobs:
           #ssh -vT git@github.com
           #ssh -T git@github.com
           
+          git checkout -b maine
           git config pull.rebase false
           git pull upstream main --allow-unrelated-histories
           ls
           
-          git checkout -b maine
           git merge upstream/maine
           #git pull origin maine --allow-unrelated-histories 
           ls

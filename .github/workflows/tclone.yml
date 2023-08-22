@@ -66,4 +66,4 @@ jobs:
           #git merge main/maine
           #git pull origin --allow-unrelated-histories 
           ls
-          git push -u origin maine
+          git push --set-upstream origin maine

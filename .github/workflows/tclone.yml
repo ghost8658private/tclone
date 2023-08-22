@@ -63,7 +63,7 @@ jobs:
           git pull upstream main --allow-unrelated-histories
           ls
           
-          git merge upstream/maine
-          #git pull origin maine --allow-unrelated-histories 
+          git merge main/maine
+          #git pull origin --allow-unrelated-histories 
           ls
           git push git@github.com:${{ inputs.main-repo }}

@@ -50,6 +50,7 @@ jobs:
 
       - name: Fetch Upstream Changes
         run: |
+          git gc --prune=now
           git fetch upstream main
 
       - name: Push Upstream Changes to Main Repo

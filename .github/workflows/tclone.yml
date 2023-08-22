@@ -54,10 +54,10 @@ jobs:
 
       - name: Push Upstream Changes to Main Repo
         run: |
+          git checkout clone
           git config pull.rebase false
           git pull upstream clone --allow-unrelated-histories
           ls
-          git checkout clone
           #git pull origin main --allow-unrelated-histories 
           #ls
           git push git@github.com:${{ inputs.main-repo }} clone

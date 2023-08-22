@@ -22,19 +22,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-
-      - name: Create Main Repo (if not exists)
-        env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        run: |
-          REPO_EXIST=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: token $ACCESS_TOKEN" "https://api.github.com/repos/${{ inputs.main-repo }}")
-          if [ $REPO_EXIST -eq 404 ]; then
-            echo "Creating repository ${{ inputs.main-repo }}"
-            curl -X POST -H "Authorization: token $ACCESS_TOKEN" -d '{"name":"'"${{ inputs.main-repo }}"'"}' "https://api.github.com/user/repos"
-          else
-            echo "Repository ${{ inputs.main-repo }} already exists"
-          fi
     
 
       - name: Add SSH key
@@ -57,30 +44,20 @@ jobs:
           git config --global user.name "ghost8658private"
 
       - name: Add Upstream Remote
-        env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
-          #git remote set-url origin git@github.com:ghost8658private/ghost8658private-worktclone
+          git remote set-url origin git@github.com:${{ inputs.main-repo }}
           git remote add upstream git@github.com:${{ inputs.upstream-repo }}
-          git remote -v
 
       - name: Fetch Upstream Changes
         run: |
-          git fetch upstream main
+          git fetch upstream clone
 
       - name: Push Upstream Changes to Main Repo
-        env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
-          git checkout -b woww
           git config pull.rebase false
-          git pull upstream main --allow-unrelated-histories
+          git pull upstream clone --allow-unrelated-histories
           ls
-          #git pull origin --allow-unrelated-histories 
+          git checkout clone
+          #git pull origin main --allow-unrelated-histories 
           #ls
-          #git push git@github.com:ghost8658private/ghost8658private-worktclone #HEAD:main
-          git remote remove upstream
-          git remote add origin git@github.com:ghost8658private/ghost8658private-worktclone.git
-          #git commit -m "first commit"
-          git branch -M main
-          git push -u origin main
+          git push git@github.com:${{ inputs.main-repo }} clone

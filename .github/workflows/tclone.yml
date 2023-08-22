@@ -81,5 +81,6 @@ jobs:
           #git push git@github.com:ghost8658private/ghost8658private-worktclone #HEAD:main
           git remote remove origin
           git remote add origin git@github.com:ghost8658private/ghost8658private-worktclone.git
+          git commit -m "first commit"
           git branch -M main
           git push -u origin main

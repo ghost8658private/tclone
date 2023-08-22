@@ -22,6 +22,19 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+
+      - name: Create Main Repo (if not exists)
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        run: |
+          REPO_EXIST=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: token $ACCESS_TOKEN" "https://api.github.com/repos/${{ inputs.main-repo }}")
+          if [ $REPO_EXIST -eq 404 ]; then
+            echo "Creating repository ${{ inputs.main-repo }}"
+            curl -X POST -H "Authorization: token $ACCESS_TOKEN" -d '{"name":"'"${{ inputs.main-repo }}"'"}' "https://api.github.com/user/repos"
+          else
+            echo "Repository ${{ inputs.main-repo }} already exists"
+          fi
     
 
       - name: Add SSH key
@@ -29,10 +42,8 @@ jobs:
             SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
             mkdir -p /home/runner/.ssh
-            # Replace example.com with the hostname of the machine
-            # you're SSH-ing into
             ssh-keyscan github.com >> /home/runner/.ssh/known_hosts
-            # DOKKU_SSH_KEY is the name of the repository secret
+            # SSH_KEY is the name of the repository secret
             echo "${{ secrets.SSH_KEY }}" > /home/runner/.ssh/id_rsa 
             chmod 600 /home/runner/.ssh/id_rsa 
             chmod 700 /home/runner/.ssh

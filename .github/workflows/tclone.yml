@@ -61,7 +61,9 @@ jobs:
           git config pull.rebase false
           git pull upstream main --allow-unrelated-histories
           ls
+          
           git checkout -b maine
-          git pull origin main --allow-unrelated-histories 
+          #git merge upstream/maine
+          git pull origin maine --allow-unrelated-histories 
           ls
           git push git@github.com:${{ inputs.main-repo }}

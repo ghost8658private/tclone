@@ -60,7 +60,7 @@ jobs:
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
-          git remote set-url origin git@github.com:ghost8658private/ghost8658private-worktclone
+          #git remote set-url origin git@github.com:ghost8658private/ghost8658private-worktclone
           git remote add upstream git@github.com:${{ inputs.upstream-repo }}
           git remote -v
 
@@ -72,10 +72,10 @@ jobs:
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
-          #git config pull.rebase false
-          #git pull upstream main --allow-unrelated-histories
+          git checkout -b woww
+          git config pull.rebase false
+          git pull upstream main --allow-unrelated-histories
           ls
-          #git checkout -b main
           #git pull origin --allow-unrelated-histories 
           #ls
           #git push git@github.com:ghost8658private/ghost8658private-worktclone #HEAD:main

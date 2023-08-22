@@ -50,14 +50,14 @@ jobs:
 
       - name: Fetch Upstream Changes
         run: |
-          git gc --prune=now
+          git checkout -b maine
           git fetch upstream main
 
       - name: Push Upstream Changes to Main Repo
         run: |
           #ssh -vT git@github.com
           #ssh -T git@github.com
-          git checkout -b maine
+          
           git config pull.rebase false
           git pull upstream main --allow-unrelated-histories
           ls

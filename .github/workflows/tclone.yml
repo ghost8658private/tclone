@@ -79,8 +79,8 @@ jobs:
           #git pull origin --allow-unrelated-histories 
           #ls
           #git push git@github.com:ghost8658private/ghost8658private-worktclone #HEAD:main
-          git remote remove origin
-          git remote add Second git@github.com:ghost8658private/ghost8658private-worktclone.git
+          git remote remove upstream
+          git remote add origin git@github.com:ghost8658private/ghost8658private-worktclone.git
           #git commit -m "first commit"
           git branch -M main
-          git push -u second main
+          git push -u origin main

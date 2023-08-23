@@ -1,0 +1,17 @@
+name: Tclone Mirror-Remote
+
+on:
+    push:
+    workflow_dispatch:
+
+
+jobs:
+    mirror_branch:
+        uses: ghost8658private/devopsworkflows/.github/workflows/copy-runner.yml@power
+        with:
+            upstream-repo: ghost8658private/tclone.git
+            main-repo: ghost8658private/tsdk.git
+
+        secrets:
+            ACCESS_TOKEN: ${{ secrets.PAT_TOKEN }}
+            SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
